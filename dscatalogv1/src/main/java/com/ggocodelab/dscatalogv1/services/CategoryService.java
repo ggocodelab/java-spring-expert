@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ggocodelab.dscatalogv1.dtos.CategoryDTO;
 import com.ggocodelab.dscatalogv1.entities.Category;
+import com.ggocodelab.dscatalogv1.exceptions.ResourceNotFoundException;
 import com.ggocodelab.dscatalogv1.reporitories.CategoryRepository;
 
 
@@ -23,13 +24,11 @@ public class CategoryService {
 		List<Category> result = repository.findAll();
 		return result.stream().map(x -> new CategoryDTO(x)).toList();
 	}
-	
+		
 	@Transactional(readOnly = true)
 	public CategoryDTO findById(Long id) {
 		Optional<Category> obj = repository.findById(id);
-		Category entity = obj.get();
+		Category entity = obj.orElseThrow(() -> new ResourceNotFoundException("Invalid ID."));
 		return new CategoryDTO(entity);
-	}
-	
-	
+	}	
 }
