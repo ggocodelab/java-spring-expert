@@ -55,8 +55,5 @@ public class CategoryController {
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
-	}
-	
-	
-	
+	}	
 }

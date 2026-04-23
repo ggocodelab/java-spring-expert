@@ -55,15 +55,12 @@ public class CategoryService {
 	public void delete(Long id) {
 		if (!repository.existsById(id)) {
 			throw new ResourceNotFoundException("Resource not found");
-		}
-		
+		}		
 		try {
-	        	repository.deleteById(id);    		
+	        	repository.deleteById(id);   		
 		}
 	    	catch (DataIntegrityViolationException e) {
 	    		throw new DatabaseException("Integrity violation.");
 	   	}
-	}
-	
-	
+	}	
 }
