@@ -28,3 +28,29 @@ Repositório de estudo dedicado principalmente ao acompanhamento das aulas guiad
 [✔] Dados de Auditoria  
 [✔] Paginação  
 [✔] Mapeamento JPA N-N 
+
+### Móulo 2: Testes automatizados
+[] Setup do projeto DSCatalog  
+[] Tipos de teste  
+[] Benefícios dos testes automatizados  
+[] O que é TDD  
+[] Boas práticas para testes  
+[] JUnit  
+[] Testes Java vanilla  
+[] Padrão de projeto Factory para instanciar objetos  
+[] Exercícios JUnit vanilla  
+[] Testes com Spring, principais annotations  
+[] Testes de repository  
+[] Fixtures no JUnit, BeforeEach  
+[] Exercício com repository  
+[] Mockito vs MockBean  
+[] Testes de unidade da camada Service  
+[] Imports estáticos do Mockito  
+[] Simulando comportamentos diversos com Mockito  
+[] Exercício testes de unidade com Mockito  
+[] Testes na camada web  
+[] Legibilidade e negociação de conteúdo  
+[] Exercício testes na camada web  
+[] Testes de integração  
+[] Teste de integração na camada web  
+[] Implementando o desafio TDD resolvido  
