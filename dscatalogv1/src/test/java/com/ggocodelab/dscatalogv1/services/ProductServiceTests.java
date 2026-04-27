@@ -1,6 +1,7 @@
 package com.ggocodelab.dscatalogv1.services;
 
-import static org.mockito.Mockito.any;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -13,7 +14,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.dao.DataIntegrityViolationException;
 
+import com.ggocodelab.dscatalogv1.exceptions.DatabaseException;
 import com.ggocodelab.dscatalogv1.exceptions.ResourceNotFoundException;
 import com.ggocodelab.dscatalogv1.reporitories.ProductRepository;
 
@@ -28,11 +31,13 @@ public class ProductServiceTests {
 	
 	private long existingId;
 	private long nonExistingId;
+	private long dependentId;
 	
 	@BeforeEach
 	void setUp() {
 		existingId = 1L;
 		nonExistingId = 1000L;
+		dependentId = 3L;
 	}
 	
 	@Test
@@ -57,4 +62,16 @@ public class ProductServiceTests {
 
 	    verify(repository, never()).deleteById(any());
 	}
+	
+	@Test
+	public void deleteShouldThrowDatabaseExceptionWhenDependentId() {
+		
+		when(repository.existsById(dependentId)).thenReturn(true);
+		doThrow(DataIntegrityViolationException.class)
+		       .when(repository).deleteById(dependentId);
+
+		Assertions.assertThrows(DatabaseException.class, () -> {
+		    service.delete(dependentId);
+		});
+	}	
 }
